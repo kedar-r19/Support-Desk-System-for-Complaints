@@ -1,0 +1,63 @@
+{% extends "base.html" %}    
+
+{% block content %}
+
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">Complaint</h2>
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{complaint.store_name}}</h1>
+        <div class="flex mb-4">
+          <a href="/complaints/{{complaint.pk}}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+          Overview
+          </a>
+          {% if not request.user.is_customer %}:
+            <a href="/complaints/{{ complaint.pk }}/categories" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+            Category
+            </a>
+          {% endif %}
+          {% if request.user.is_owner %}:
+            <a href="/complaints/{{ complaint.pk }}/update" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+            Update Details</a>
+          {% endif %}
+          {% if request.user.is_customer %}:
+           <a href="/customers/complaints/{{ complaint.pk }}/update" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+            Update Details</a>            
+          {% endif %}
+        </div>
+        <p class="leading-relaxed mb-4">{{complaint.description}}</p>
+        <div class="flex border-t border-gray-200 py-2 mt-10">
+          <span class="text-gray-500">Store Name</span>
+          <span class="ml-auto text-gray-900">{{ complaint.store_name }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Store ID</span>
+          <span class="ml-auto text-gray-900">{{ complaint.store_id }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Contact Number</span>
+          <span class="ml-auto text-gray-900">{{ complaint.store_contact_no }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Agent</span>
+          <span class="ml-auto text-gray-900">{{ complaint.agent }}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Customer Username</span>
+          <span class="ml-auto text-gray-900">{{ complaint.customer }}</span>
+        </div>
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-gray-500">Source</span>
+          <span class="ml-auto text-gray-900">{{complaint.source}}</span>
+        </div>
+        <div class="flex">
+        <a href="/complaints" class="w-full bg-blue-500 text-white hover:bg-blue-600 px-3 py-2 rounded-md	text-center">Go back to Complaints</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+
